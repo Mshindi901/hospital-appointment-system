@@ -37,7 +37,7 @@ export const signin = async(req, res) => {
         if(!isPassword){
             return res.status(400).json({success: false, message: 'Wrong Password'})
         };
-        const token = jwt.sign({id: isUser.id}, process.env.ACESS_TOKEN, {expiresIn: '1h'});
+        const token = jwt.sign({id: isUser.id, role: isUser.role}, process.env.ACCESS_TOKEN, {expiresIn: '1h'});
         return res.status(200).json({success: true, message: 'User signed in', data: token})
     } catch (error) {
         console.error(`Error with signing in user ${error}`);

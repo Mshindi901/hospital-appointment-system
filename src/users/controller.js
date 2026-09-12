@@ -63,7 +63,7 @@ export const updatePassword = async(req, res) => {
         if(is_passowrd){
             return res.status(400).json({success: false, message: 'Entered current pasword'});
         };
-        const updated_user = await user.update({passowrd: new_password});
+        const updated_user = await user.update({password: new_password});
         return res.status(200).json({success: true, message: 'updated passowrd'})
     } catch (error) {
         console.error(`Error with updating column password in record ${error}`);

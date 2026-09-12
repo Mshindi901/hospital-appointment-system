@@ -2,8 +2,8 @@ import Appointment from "./schema.js";
 
 export const newRecord = async(req, res) => {
     try {
-        const {patient_id, doctor_id, hospital_id, date, start_time, end_time } = req.body;
-        if(!patient_id || !doctor_id || !hospital_id || !date || !time){
+        const {patient_id, doctor_id, hospital_id, date, start_time} = req.body;
+        if(!patient_id || !doctor_id || !hospital_id || !date || !start_time){
             return res.status(400).json({success: false, message: 'Provide Full Info'})
         };
         const new_appointment = await Appointment.create({
@@ -12,7 +12,6 @@ export const newRecord = async(req, res) => {
             hospital_id,
             date,
             start_time,
-            end_time
         });
         return res.status(201).json({success: true, message: 'Appointment created'})
     } catch (error) {

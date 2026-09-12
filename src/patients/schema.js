@@ -11,7 +11,7 @@ const Patient = sequelize.define('patients', {
     hospital_id: {
         type: DataTypes.UUID,
         references: {
-            model: 'users',
+            model: 'hospitals',
             key: 'id'
         }
     },

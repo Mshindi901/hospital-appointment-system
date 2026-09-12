@@ -4,7 +4,7 @@ import { DataTypes } from "sequelize";
 const Appointment = sequelize.define('appointments', {
     id: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false
     },
@@ -40,17 +40,11 @@ const Appointment = sequelize.define('appointments', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    end_time: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     status: {
         type: DataTypes.ENUM('active', 'inactive'),
         defaultValue: 'active',
         allowNull: false
     },
-}, {
-        indexes: [{name: 'unique_appointment',unique: true, fields: ['doctor_id', 'start_time']}]
-    }, {timestamps: true});
+},{timestamps: true, indexes: [{name: 'unique_appointment',unique: true, fields: ['doctor_id', 'start_time']}]});
 
 export default Appointment;
