@@ -94,7 +94,7 @@ export const updateRecord = async(req, res) => {
         if(!id){
             return res.status(400).json({success: false, message: 'Provide record id'})
         };
-        const {patient_id, doctor_id, hospital_id, date, start_time, end_time } = req.body;
+        const {patient_id, doctor_id, hospital_id, date, start_time, status, end_time } = req.body;
         const appointment = await Appointment.findByPk(id);
         if(!appointment){
             return res.status(404).json({success: false, message: 'Invalid Id'})
@@ -105,6 +105,7 @@ export const updateRecord = async(req, res) => {
             hospital_id,
             date,
             start_time,
+            status,
             end_time
         });
         return res.status(200).json({success: true, message: 'Record Updated'})
