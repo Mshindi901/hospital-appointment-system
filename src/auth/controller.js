@@ -2,7 +2,7 @@ import User from "./schema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import logger from '../utils/logger.js';
+import logger from '../config/logger.js';
 dotenv.config();
 
 export const signup = async(req, res) => {

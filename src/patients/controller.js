@@ -1,5 +1,5 @@
 import Patient from "./schema.js";
-import logger from "../utils/logger.js";
+import logger from "../config/logger.js";
 
 export const newRecord = async(req, res) => {
     try {

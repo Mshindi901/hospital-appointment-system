@@ -1,6 +1,6 @@
 import User from "../auth/schema.js";
 import bcrypt from "bcryptjs";
-import logger from "../utils/logger.js";
+import logger from "../config/logger.js";
 
 export const getRecordById = async(req, res) => {
     try {
