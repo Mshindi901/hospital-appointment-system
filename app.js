@@ -13,7 +13,7 @@ dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
-app.use(cors({origin: ['http://localhost:5173']}))
+app.use(cors({origin: ['https://care-sync-app.vercel.app']}))
 
 app.use('/api', AuthRoutes);
 app.use('/api', HospitalRoutes);
