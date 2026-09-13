@@ -8,12 +8,14 @@ import DoctorRoutes from './src/Doctors/routes.js';
 import UserRoutes from './src/users/routes.js';
 import PatientRoutes from './src/patients/routes.js';
 import AppointmentRoutes from './src/appointments/routes.js';
+import httpLogger from './src/middleware/logger.js';
 dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
 app.use(cors({origin: ['https://care-sync-app.vercel.app']}))
+app.use(httpLogger);
 
 app.use('/api', AuthRoutes);
 app.use('/api', HospitalRoutes);
