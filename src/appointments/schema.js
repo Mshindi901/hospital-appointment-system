@@ -11,7 +11,7 @@ const Appointment = sequelize.define('appointments', {
     patient_id: {
         type: DataTypes.UUID,
         references: {
-            model: 'users',
+            model: 'patients',
             key: 'id'
         },
         allowNull: false
