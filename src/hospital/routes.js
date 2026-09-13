@@ -10,8 +10,8 @@ import {authenticate, authorize} from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/hospital', authenticate, authorize('admin'), newRecord);
-router.get('/hospital', authenticate, authorize('admin'), getRecordByName);
+router.post('/hospital', authenticate, authorize('admin',), newRecord);
+router.get('/hospital', authenticate, authorize('admin', 'manager'), getRecordByName);
 router.get('/hospital/:id', authenticate, authorize('manager', 'admin'), getRecordById);
 router.put('/hospital/:id', authenticate, authorize('admin'),updateRecord);
 router.delete('/hospital/:id', authenticate, authorize('admin'), deleteRecord);
