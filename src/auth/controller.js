@@ -7,15 +7,15 @@ dotenv.config();
 export const signup = async(req, res) => {
     try {
         const {hospital_id, name, email, password, role} = req.body;
-        if(!hospital_id || !name || !email || !password || !role){
+        if(!name || !email || !password || !role){
             return res.status(400).json({success: false, message: 'Internal Server Error'});
         };
         const isUser = await User.findOne({where:{email: email}});
         if(isUser){
-            return res.status(400).json({success: false, messsage: 'Email exists already'});
+            return res.status(400).json({success: false, message: 'Email exists already'});
         };
         const hashedPassword = await bcrypt.hash(password, 12);
-        const new_user = await User.create({hospital_id, name, email, password: hashedPassword, role});
+        const new_user = await User.create({hospital_id: hospital_id || null, name, email, password: hashedPassword, role});
         return res.status(201).json({success: true, message: 'User Signed up'})
     } catch (error) {
         console.error(`Error with signing up user ${error}`);
@@ -37,7 +37,7 @@ export const signin = async(req, res) => {
         if(!isPassword){
             return res.status(400).json({success: false, message: 'Wrong Password'})
         };
-        const token = jwt.sign({id: isUser.id, role: isUser.role}, process.env.ACCESS_TOKEN, {expiresIn: '1h'});
+        const token = jwt.sign({id: isUser.id, role: isUser.role, name: isUser.name}, process.env.ACCESS_TOKEN, {expiresIn: '1h'});
         return res.status(200).json({success: true, message: 'User signed in', data: token})
     } catch (error) {
         console.error(`Error with signing in user ${error}`);

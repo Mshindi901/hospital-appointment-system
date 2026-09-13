@@ -2,11 +2,11 @@ import Hospital from "./schema.js";
 
 export const newRecord = async(req, res) => {
     try {
-        const {user_id, name, contacts, location} = req.body;
-        if(!user_id ||!name || !location){
+        const {name, contacts, location} = req.body;
+        if(!name || !location){
             return res.status(400).json({success: false, message: 'Provide Full info'})
         };
-        const new_record = await Hospital.create({user_id, name, contacts, location});
+        const new_record = await Hospital.create({name, contacts, location});
         if(!new_record){
             return res.status(404).json({success: false, message: 'Failed to create new Record'});
         };
@@ -36,11 +36,14 @@ export const getRecordById = async(req, res) => {
 
 export const getRecordByName = async(req, res) => {
     try {
-        const {name} = req.body;
+        const name = req.query?.name || req.body?.name;
+
         if(!name){
-            return res.status(400).json({success: false, message: 'Provide hospital name'})
+            const hospitals = await Hospital.findAll();
+            return res.status(200).json({success: true, message: 'Hospitals fetched', data: hospitals || []});
         };
-        const hospital = await Hospital.findOne({where:{name: name}});
+
+        const hospital = await Hospital.findOne({where:{name}});
         if(!hospital){
             return res.status(404).json({success: false, message: 'failed to fetch'})
         };

@@ -8,14 +8,6 @@ const Hospital = sequelize.define('hospitals', {
         primaryKey: true,
         allowNull: false
     },
-    user_id: {
-        type: DataTypes.UUID,
-        references: {
-            model: 'users',
-            key: 'id'
-        },
-        allowNull: false
-    },
     name: {
         type: DataTypes.STRING,
         allowNull: false

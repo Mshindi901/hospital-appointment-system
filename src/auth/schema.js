@@ -14,7 +14,7 @@ const User = sequelize.define('users', {
             model: 'hospitals',
             key: 'id'
         },
-        allowNull: false
+        allowNull: true
     },
     name: {
         type: DataTypes.STRING,

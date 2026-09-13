@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import {connect_database} from './src/database/connect.js'
 import AuthRoutes from './src/auth/routes.js';
 import HospitalRoutes from './src/hospital/routes.js';
@@ -12,6 +13,7 @@ dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
+app.use(cors({origin: ['http://localhost:5173']}))
 
 app.use('/api', AuthRoutes);
 app.use('/api', HospitalRoutes);
