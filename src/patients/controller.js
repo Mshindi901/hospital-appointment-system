@@ -3,9 +3,9 @@ import logger from "../config/logger.js";
 
 export const newRecord = async(req, res) => {
     try {
-        const {hospital_id, name, email, address} = req.body;
+        const {hospital_id, name, email, address, gender, dob, allergies, blood_type} = req.body;
         if(!hospital_id || !name || !email){
-            logger.warn('Patient creation rejected: missing required fields', { hospital_id: hospital_id || null, name: name || null, email: email || null });
+            logger.warn('Patient creation rejected: missing required fields', { hospital_id: hospital_id || null, name: name || null, email: email || null, gender: gender || null, dob: dob || null, address: address || null, blood_type: blood_type || null});
             return res.status(400).json({success: false, message: 'Provide Full info'})
         };
         const new_record = await Patient.create({hospital_id, name, email, address});
@@ -68,13 +68,13 @@ export const updateRecord = async(req, res) => {
             logger.warn('Patient update rejected: missing id');
             return res.status(400).json({success: false, message: 'Provide Id'});
         };
-        const {hospital_id, name, email, address} = req.body;
+        const {hospital_id, name, email, address, gender, dob, allergies, blood_type} = req.body;
         const patient = await Patient.findByPk(id);
         if(!patient){
             logger.warn('Patient update failed: invalid id', { id });
             return res.status(404).json({success: false, message: 'Invalid Id'});
         };
-        const updated_record = await patient.update({hospital_id, name, email, address});
+        const updated_record = await patient.update({hospital_id, name, email, address, gender, dob, allergies, blood_type});
         if(!updated_record){
             logger.warn('Patient update failed: update returned null', { patientId: patient.id });
             return res.status(404).json({success: false, message: 'Failed to update'})

@@ -29,7 +29,23 @@ const Patient = sequelize.define('patients', {
     address: {
         type: DataTypes.STRING,
         allowNull: true
-    }
+    },
+    gender: {
+        type: DataTypes.ENUM('m', 'f'),
+        allowNull: true
+    },
+    dob: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    allergies: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true
+    },
+    blood_type: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
 }, {timestamps: false});
 
 export default Patient;

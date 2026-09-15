@@ -8,6 +8,9 @@ import DoctorRoutes from './src/Doctors/routes.js';
 import UserRoutes from './src/users/routes.js';
 import PatientRoutes from './src/patients/routes.js';
 import AppointmentRoutes from './src/appointments/routes.js';
+import PatientHistoryRoutes from './src/patient-history/routes.js';
+import staffRoutes from './src/staff/routes.js';
+import PatientService from './src/patient-services/routes.js';
 import httpLogger from './src/middleware/logger.js';
 dotenv.config();
 
@@ -23,6 +26,9 @@ app.use('/api', DoctorRoutes);
 app.use('/api', UserRoutes);
 app.use('/api', PatientRoutes);
 app.use('/api', AppointmentRoutes);
+app.use('/api', PatientHistoryRoutes);
+app.use('/api', staffRoutes);
+app.use('/api', PatientService);
 
 app.listen(PORT, () => {
     connect_database();
