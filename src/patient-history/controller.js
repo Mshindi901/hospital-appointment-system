@@ -79,7 +79,13 @@ export const updatePatientHistory = async(req, res) => {
         if(!record){
             return res.status(404).json({success: false, message: 'Invalid Id'})
         };
-        const updated_record = await record.update({patient_id, hospital_id, date, served_by, status});
+        const updated_record = await record.update({
+            ...(patient_id !== undefined && {patient_id}),
+            ...(hospital_id !== undefined && {hospital_id}),
+            ...(date !== undefined && {date}),
+            ...(served_by !== undefined && {served_by}),
+            ...(status !== undefined && {status})
+        });
         if(!updated_record){
             return res.status(404).json({success: false, message: 'Update Failed'})
         }

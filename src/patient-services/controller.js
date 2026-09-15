@@ -1,11 +1,19 @@
 import PatientServices from "./schema.js";
+import PatientHistory from '../patient-history/schema.js';
 
 export const newServiceRecord = async (req, res) => {
     try {
         const {history_id, doctor_id, date, service_provided} = req.body;
         if(!history_id || !doctor_id || !date || !service_provided){
-            return res.status(400).json({success: false, message: 'Internal Server Error'})
+            return res.status(400).json({success: false, message: 'Provide all service information'})
         };
+        const history = await PatientHistory.findByPk(history_id);
+        if(!history){
+            return res.status(404).json({success: false, message: 'Patient history not found'})
+        }
+        if(history.status !== 'open'){
+            return res.status(400).json({success: false, message: 'Services can only be added to open history records'})
+        }
         const new_service_record = await PatientServices.create({history_id, doctor_id, date, service_provided});
         return res.status(201).json({success: true, message: 'Record added'})
     } catch (error) {
