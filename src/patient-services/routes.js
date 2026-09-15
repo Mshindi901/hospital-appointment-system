@@ -5,12 +5,13 @@ import {
     getServicesByHistory,
     deleteServices
 } from './controller.js';
+import {authenticate, authorize} from '../middleware/auth.js'
 
 const router = express.Router();
 
-router.post('/services', newServiceRecord);
-router.get('/services/patient-history/:id', getServicesByHistory);
-router.get('/services/doctor/:id', getServicesByDoctor);
-router.delete('/services/:id', deleteServices);
+router.post('/services', authenticate, authorize('doctor'), newServiceRecord);
+router.get('/services/patient-history/:id', authenticate, authorize('staff', 'doctor'), getServicesByHistory);
+router.get('/services/doctor/:id', authenticate, authorize('doctor'), getServicesByDoctor);
+router.delete('/services/:id', authenticate, authorize('staff', 'doctor'), deleteServices);
 
 export default router;
