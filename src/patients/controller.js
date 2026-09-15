@@ -8,7 +8,7 @@ export const newRecord = async(req, res) => {
             logger.warn('Patient creation rejected: missing required fields', { hospital_id: hospital_id || null, name: name || null, email: email || null, gender: gender || null, dob: dob || null, address: address || null, blood_type: blood_type || null});
             return res.status(400).json({success: false, message: 'Provide Full info'})
         };
-        const new_record = await Patient.create({hospital_id, name, email, address});
+        const new_record = await Patient.create({hospital_id, name, email, address, gender, dob, allergies, blood_type});
         if(!new_record){
             logger.warn('Patient creation failed: create returned null', { hospital_id, name, email });
             return res.status(404).json({success: false, message: 'failed to add record'});

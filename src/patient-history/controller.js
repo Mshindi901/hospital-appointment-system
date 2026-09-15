@@ -6,7 +6,7 @@ export const newpatientHistory = async(req, res) => {
         if(!patient_id || !hospital_id || !date || !served_by || !status){
             return res.status(400).json({success: false, message: 'Provide All Info'});
         };
-        const new_record = await PatientHistory.create({patient_id, hospital_id, date, served_by});
+        const new_record = await PatientHistory.create({patient_id, hospital_id, date, served_by, status});
         if(!new_record){
             return res.status(404).json({success: false, message: 'Failed to create'})
         };

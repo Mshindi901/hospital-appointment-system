@@ -23,7 +23,7 @@ export const signup = async(req, res) => {
         const new_user = await User.create({hospital_id: hospital_id || null, name, email, password: hashedPassword, role});
 
         logger.info('User signed up successfully', { userId: new_user.id, email, role });
-        return res.status(201).json({success: true, message: 'User Signed up'})
+        return res.status(201).json({success: true, message: 'User Signed up', data: { id: new_user.id, name: new_user.name, email: new_user.email, role: new_user.role }})
     } catch (error) {
         logger.error('Error while signing up user', { error: error.message, stack: error.stack });
         return res.status(500).json({success: false, message: 'Internal Server Error'});
