@@ -12,7 +12,7 @@ import {authenticate, authorize} from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/user', authenticate, authorize('admin'), getAllRecords);
-router.get('/user/:id', authenticate, authorize('admin', 'manager'), getRecordById);
+router.get('/user/:id', authenticate, authorize('admin', 'manager', 'staff'), getRecordById);
 router.get('/user/hospital/:id', authenticate, authorize('manager', 'admin'), getRecordsByHospital);
 router.put('/user/password/:id',authenticate, authorize('manager', 'admin'), updatePassword);
 router.put('/user/:id', authenticate, authorize('manager', 'admin'), updateRecord);
