@@ -49,7 +49,7 @@ export const getServicesByDoctor = async(req, res) => {
         if(!service_history || service_history.length == 0){
             return res.status(404).json({success: false, message: 'No record Fetched'})
         };
-        return res.status(200).json({success: false, message: 'Records Fetched', data: service_history})
+        return res.status(200).json({success: true, message: 'Records Fetched', data: service_history})
     } catch (error) {
         console.error(`Error with getting services by doctor Id ${error}`);
         return res.status(500).json({success: false, message: 'Internal Server Error'})

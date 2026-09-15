@@ -14,7 +14,7 @@ const router = express.Router();
 router.post('/staff', authenticate, authorize('manager'), newStaffRecord);
 
 router.get('/staff/hospital/:id',  authenticate, authorize('manager'), getStaffByHospital);
-router.get('/staff/user/:id',  authenticate, authorize('manager'), getStaffByUser);
+router.get('/staff/user/:id',  authenticate, authorize('manager', 'staff'), getStaffByUser);
 router.get('/staff/:id', authenticate, authorize('manager', 'staff'), getStaffById);
 
 router.put('/staff/:id', authenticate, authorize('manager'), updateStaff);
